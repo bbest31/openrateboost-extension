@@ -4,6 +4,11 @@ Official Chrome extension for OpenRateBoost, an AI-powered app designed to boost
 ## Build & Run
 
 ### .env file
+The dotenv files must be denoted based on which environment they are for:
+* `dev.env` is for development
+* `staging.env` is for staging
+* `.env` is for production
+
 The following have development examples
 ```
 API_SERVER_URL=http://localhost:8000/api/v1
@@ -24,7 +29,10 @@ INBOXSDK_APP_ID=
 Inside this directory, you can run below commands:
 
   `npm run watch`
-    Listens for files changes and rebuilds automatically.
+    Listens for files changes and rebuilds automatically using the development environment.
+
+  `npm run watch:staging`
+    Listens for files changes and rebuilds automatically using the staging environment.
 
   `npm run build`
     Bundles the app into static files for Chrome store.

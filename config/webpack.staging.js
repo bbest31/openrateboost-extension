@@ -7,8 +7,7 @@ const config = require('./webpack.config.js');
 const PATHS = require('./paths');
 
 module.exports = merge(config, {
-  mode: 'development',
-  devtool: 'inline-source-map',
+  mode: 'staging',
   plugins: [
     // Copy static assets from `public` folder to `build` folder
     new CopyWebpackPlugin({
@@ -29,6 +28,6 @@ module.exports = merge(config, {
       filename: '[name].css',
     }),
     // Load environment variables from .env file
-    new Dotenv({path: './dev.env'}),
+    new Dotenv({ path: './staging.env' }),
   ],
 });

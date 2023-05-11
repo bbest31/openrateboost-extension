@@ -14,4 +14,4 @@ npm-debug.log*
 # packed files
 /release
 
-.env
+*.env
