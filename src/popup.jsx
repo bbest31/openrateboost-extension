@@ -50,10 +50,13 @@ const theme = createTheme({
 function Popup() {
   const mixpanelConfig =
     process.env.NODE_ENV !== 'production'
-      ? { debug: true, api_host: 'https://api.mixpanel.com' }
-      : { api_host: 'https://api.mixpanel.com' };
+      ? { debug: true, api_host: 'https://api.mixpanel.com', ignore_dnt: true }
+      : { api_host: 'https://api.mixpanel.com', ignore_dnt: true };
   mixpanel.init(process.env.MIXPANEL_TOKEN, mixpanelConfig);
 
+  const MAX_FREE_USES = 10;
+  const MAX_BASIC_USES = 25;
+  const MAX_PREMIUM_USES = 100;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [maxUsage, setMaxUsage] = useState(MAX_FREE_USES);
   const [userPlan, setUserPlan] = useState('free');
@@ -64,10 +67,6 @@ function Popup() {
   const [creativity, setCreativity] = useState(85);
   const [subjectLines, setSubjectLines] = useState([]);
   const [subjectLinesLoading, setSubjectLinesLoading] = useState(false);
-
-  const MAX_FREE_USES = 10;
-  const MAX_BASIC_USES = 25;
-  const MAX_PREMIUM_USES = 100;
 
   /**
    * isAuthenticated - Checks if the user is authenticated by checking if the access_token, expires_in, and id_token are in session storage.
@@ -150,6 +149,7 @@ function Popup() {
       chrome.storage.session.set({ subjectLines: res.result });
       setDisplayError(false);
       mixpanel.track('Generate Subject Lines', { Source: 'Popup' });
+      userPlan === 'free' ? setUsageCount(usageCount + 1) : null;
     } else {
       setDisplayError(true);
     }
@@ -315,7 +315,12 @@ function Popup() {
             <Alert
               severity="info"
               action={
-                <Button variant="outlined" size="small" onClick={login}>
+                <Button
+                  variant="outlined"
+                  color="info"
+                  size="small"
+                  onClick={login}
+                >
                   {geti18nText('login')}
                 </Button>
               }
