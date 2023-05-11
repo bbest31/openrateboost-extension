@@ -31,8 +31,8 @@ Inside this directory, you can run below commands:
   `npm run watch`
     Listens for files changes and rebuilds automatically using the development environment.
 
-  `npm run watch:staging`
-    Listens for files changes and rebuilds automatically using the staging environment.
+  `npm run build:staging`
+    Bundles the app into static files using the variables for the staging environment.
 
   `npm run build`
     Bundles the app into static files for Chrome store.
