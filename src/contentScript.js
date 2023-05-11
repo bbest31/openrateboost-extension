@@ -10,6 +10,8 @@ import './contentScript.css';
 //   }
 // });
 
+var pixelId;
+
 async function checkIsAuthenticated() {
   const res = await chrome.runtime.sendMessage({ type: 'isAuth' });
   if (res?.result === true) {
@@ -112,6 +114,7 @@ function renderGenerateComposeNotice(button, buttonText, composeView, initial) {
 
 InboxSDK.load(2, process.env.INBOXSDK_APP_ID).then((sdk) => {
   sdk.Compose.registerComposeViewHandler((composeView) => {
+    pixelId = uuidv4();
     let link = document.createElement('link');
     link.rel = 'stylesheet';
     link.type = 'text/css';
@@ -126,28 +129,30 @@ InboxSDK.load(2, process.env.INBOXSDK_APP_ID).then((sdk) => {
       composeNoticeView.el.style.margin = '0px';
       composeNoticeView.el.style.background = 'transparent';
       composeNoticeView.el.appendChild(parent);
+      // attach tracking pixel
+      let trackingPixel = document.createElement('img'); // Create a new image element
+      trackingPixel.src = `${process.env.API_SERVER_URL}/tracking_pixel.png?uuid=${pixelId}`; // Set the source URL of the tracking pixel image
+      trackingPixel.width = 1; // Set the width of the tracking pixel image to 1 pixel
+      trackingPixel.height = 1; // Set the height of the tracking pixel image to 1 pixel
+      trackingPixel.style.opacity = 0; // Set the opacity of the tracking pixel image to 0 to make it invisible
+      composeView.getBodyElement().appendChild(trackingPixel); // Append the tracking pixel image to the body of the email
     })();
 
     composeView.on('presending', () => {
       (async () => {
         const isAuth = await checkIsAuthenticated();
         if (isAuth === true) {
-          // attach tracking pixel
-          // FIXME: tracking pixel is not showing up
-          let pixelId = uuidv4();
-          var trackingPixel = document.createElement('img'); // Create a new image element
-          trackingPixel.src = `${process.env.API_SERVER_URL}/tracking_pixel.png?uuid=${pixelId}`; // Set the source URL of the tracking pixel image
-          trackingPixel.width = 1; // Set the width of the tracking pixel image to 1 pixel
-          trackingPixel.height = 1; // Set the height of the tracking pixel image to 1 pixel
-          trackingPixel.style.opacity = 0; // Set the opacity of the tracking pixel image to 0 to make it invisible
-          composeView.getBodyElement().appendChild(trackingPixel); // Append the tracking pixel image to the body of the email
-
           // send pixel uuid to background script to be saved in db
           chrome.runtime.sendMessage({
             type: 'trackingPixel',
             payload: { pixelId, subjectLine: composeView.getSubject() },
           });
         }
+        // } else {
+        //   // remove pixel if user is not logged in
+        //   let pixel = document.querySelector(`img[src*="${pixelId}"]`);
+        //   pixel.remove();
+        // }
       })();
     });
 

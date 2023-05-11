@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "watch": "webpack --mode=development --watch --config config/webpack.dev.js",
-    "watch:staging": "webpack --mode=production --watch --config config/webpack.staging.js",
+    "build:staging": "webpack --mode=production --config config/webpack.staging.js",
     "build": "webpack --mode=production --config config/webpack.prod.js"
   },
   "devDependencies": {
