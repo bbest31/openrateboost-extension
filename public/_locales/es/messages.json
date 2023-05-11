@@ -1,0 +1,90 @@
+{
+  "extName": {
+    "message": "OpenRateBoost",
+    "description": "The name of the extension."
+  },
+  "generate": {
+    "message": "Generar",
+    "description": "The label for the button that generates subject lines."
+  },
+  "generateSubjectLines": {
+    "message": "Generar líneas de asunto",
+    "description": "The label for the button that generates subject lines."
+  },
+  "loginAlert": {
+    "message": "Inicie sesión para usar OpenRateBoost",
+    "description": "The alert that appears when the user is not logged in."
+  },
+  "login": {
+    "message": "Acceso",
+    "description": "The label for the button that logs the user in."
+  },
+  "emailTextAreaLabel": {
+    "message": "Cuerpo del correo electrónico",
+    "description": "The label for the text area that contains the email body."
+  },
+  "emailTextAreaHint": {
+    "message": "Pegue aquí el cuerpo de su correo electrónico.",
+    "description": "The hint for the text area that contains the email body."
+  },
+  "help": {
+    "message": "Ayuda",
+    "description": "The label for the button that opens the help page."
+  },
+  "giveUsAReview": {
+    "message": "Dénos una reseña",
+    "description": "The label for the button that opens the review page."
+  },
+  "upgrade": {
+    "message": "Actualizar",
+    "description": "The label for the button that opens the upgrade page."
+  },
+  "freeUsesLeft": {
+    "message": "Quedan usos gratuitos: $1/$2",
+    "description": "The message that appears when the user has free uses left.",
+    "placeholders": {
+      "usage_count": {
+        "content": "$1",
+        "example": "5"
+      },
+      "max_uses": {
+        "content": "$2",
+        "example": "10"
+      }
+    }
+  },
+  "upgradeForUnlimitedUse": {
+    "message": "Actualice para usar OpenRateBoost ilimitadamente.",
+    "description": "Upgrade alert title."
+  },
+  "creativityLevel": {
+    "message": "Nivel de creatividad",
+    "description": "The label for the slider that controls the creativity of the subject lines."
+  },
+  "emailBodyErrorText": {
+    "message": "¡El cuerpo del correo electrónico no puede estar vacío!",
+    "description": "The error message that appears when the email body is empty."
+  },
+  "errorAlert": {
+    "message": "¡Ups! Algo salió mal. Por favor, inténtelo de nuevo más tarde.",
+    "description": "The error message that appears when the API call fails."
+  },
+  "loginToOpenRateBoost": {
+    "message": "Inicie sesión en OpenRateBoost",
+    "description": "The title of the login page."
+  },
+  "paidMonthlyUsage": {
+    "message": "Uso mensual: $1/$2",
+    "description": "The message that appears when the user has a paid plan.",
+    "placeholders": {
+      "usage_count": {
+        "content": "$1",
+        "example": "5"
+      },
+      "max_uses": {
+        "content": "$2",
+        "example": "25"
+      }
+    }
+  }
+}

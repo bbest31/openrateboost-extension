@@ -1,0 +1,95 @@
+#composeContainer {
+  flex-direction: row;
+  display: flex;
+  margin: 16px 0px;
+}
+
+#spacer {
+  flex: 1;
+}
+
+.primaryOutlineBtn {
+  box-sizing: border-box;
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 10px;
+  border: 1px solid rgba(60, 228, 166, 0.48);
+  border-radius: 8px;
+}
+
+.primaryOutlineBtn:hover {
+  background: rgba(60, 228, 166, 0.08);
+  border: 1px solid #108a93;
+  border-radius: 8px;
+}
+
+.primaryOutlineBtn div {
+  /* primary/main */
+
+  /* 01 Button/02 Medium */
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 22px;
+  color: #108a93;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.primaryContainedBtn {
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 10px;
+
+  background: #3ce4a6;
+  border-radius: 8px;
+  border-width: 0;
+  box-shadow: 0px 8px 16px rgba(60, 228, 166, 0.24);
+}
+
+.primaryContainedBtn:hover {
+  background: #20795b;
+  box-shadow: 0px;
+}
+
+.primaryContainedBtn div {
+  /* 01 Button/02 Small */
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 22px;
+  /* identical to box height, or 171% */
+
+  /* common/white */
+
+  color: #063437;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.primaryContainedBtn:hover div {
+  /* common/white */
+
+  color: #fff;
+}
+
+hr {
+  border: 1px solid rgba(145, 158, 171, 0.24);
+}
