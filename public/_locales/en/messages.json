@@ -86,5 +86,9 @@
   "loginToOpenRateBoost": {
     "message": "Login to OpenRateBoost",
     "description": "The title of the login page."
+  },
+  "lowercaseSubjectLines": {
+    "message": "Lowercase subject lines",
+    "description": "The label for the checkbox that controls whether the subject lines are lowercase."
   }
 }

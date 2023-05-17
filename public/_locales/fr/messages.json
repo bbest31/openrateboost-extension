@@ -86,5 +86,9 @@
         "example": "25"
       }
     }
+  },
+  "lowercaseSubjectLines": {
+    "message": "Lignes d'objet en minuscules",
+    "description": "The label for the checkbox that controls whether the subject lines are lowercase."
   }
 }

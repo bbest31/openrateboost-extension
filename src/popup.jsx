@@ -9,7 +9,9 @@ import {
   InputLabel,
   OutlinedInput,
   FormHelperText,
+  FormControlLabel,
   Slider,
+  Switch,
   Typography,
   List,
   ListItem,
@@ -60,6 +62,7 @@ function Popup() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [maxUsage, setMaxUsage] = useState(MAX_FREE_USES);
   const [userPlan, setUserPlan] = useState('free');
+  const [isLowercase, setIsLowercase] = useState(false);
   const [usageCount, setUsageCount] = useState(0);
   const [displayError, setDisplayError] = useState(false);
   const [emailBody, setEmailBody] = useState('');
@@ -142,6 +145,7 @@ function Popup() {
       payload: {
         emailBody: emailBody,
         creativity: creativity,
+        lowercase: isLowercase,
       },
     });
     if (res?.result) {
@@ -401,6 +405,17 @@ function Popup() {
               </FormHelperText>
             )}
           </FormControl>
+        </Grid>
+        <Grid item xs={12}>
+          <FormControlLabel
+            control={
+              <Switch
+                onChange={(e) => setIsLowercase(e.target.checked)}
+                disabled={!isAuthenticated || usageCount >= maxUsage}
+              />
+            }
+            label={geti18nText('lowercaseSubjectLines')}
+          />
         </Grid>
         <Grid container item xs justifyContent="flex-start">
           <Button variant="text" color="inherit" onClick={openHelp}>

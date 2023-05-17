@@ -199,7 +199,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const sub = await getUserSub();
         const res = await callApi(
           'POST',
-          `${URLS.api}/users/${sub}/subject-lines?creativity=${request.payload.creativity}`,
+          `${URLS.api}/users/${sub}/subject-lines?creativity=${request.payload.creativity}&lowercase=${request.payload.lowercase}`,
           { email: request.payload.emailBody }
         );
         if (res.status === 200) {
