@@ -40,7 +40,7 @@
     "description": "The label for the button that opens the upgrade page."
   },
   "freeUsesLeft": {
-    "message": "Free uses left: $1/$2",
+    "message": "Uses: $1/$2",
     "description": "The message that appears when the user has free uses left.",
     "placeholders": {
       "usage_count": {

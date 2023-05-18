@@ -153,7 +153,7 @@ function Popup() {
       chrome.storage.session.set({ subjectLines: res.result });
       setDisplayError(false);
       mixpanel.track('Generate Subject Lines', { Source: 'Popup' });
-      userPlan === 'free' ? setUsageCount(usageCount + 1) : null;
+      setUsageCount(usageCount + 1);
     } else {
       setDisplayError(true);
     }
@@ -244,32 +244,24 @@ function Popup() {
         </Alert>
       </Grid>
     );
-  } else if (userPlan === 'basic' && isAuthenticated) {
+  } else if (isAuthenticated) {
     planAlert = (
       <Grid item xs={12}>
         <Alert
           severity="info"
           action={
-            <Button
-              color="info"
-              variant="outlined"
-              size="small"
-              onClick={openUpgrade}
-            >
-              {geti18nText('upgrade')}
-            </Button>
+            userPlan === 'basic' ? (
+              <Button
+                color="info"
+                variant="outlined"
+                size="small"
+                onClick={openUpgrade}
+              >
+                {geti18nText('upgrade')}
+              </Button>
+            ) : null
           }
         >
-          <strong>
-            {geti18nText('paidMonthlyUsage', [`${usageCount}`, `${maxUsage}`])}
-          </strong>
-        </Alert>
-      </Grid>
-    );
-  } else if (userPlan === 'premium' && isAuthenticated) {
-    planAlert = (
-      <Grid item xs={12}>
-        <Alert severity="info">
           <strong>
             {geti18nText('paidMonthlyUsage', [`${usageCount}`, `${maxUsage}`])}
           </strong>
@@ -381,6 +373,17 @@ function Popup() {
           />
         </Grid>
         <Grid item xs={12}>
+          <FormControlLabel
+            control={
+              <Switch
+                onChange={(e) => setIsLowercase(e.target.checked)}
+                disabled={!isAuthenticated || usageCount >= maxUsage}
+              />
+            }
+            label={geti18nText('lowercaseSubjectLines')}
+          />
+        </Grid>
+        <Grid item xs={12}>
           <FormControl
             disabled={!isAuthenticated || usageCount >= maxUsage}
             error={emailBodyEmptyError}
@@ -405,17 +408,6 @@ function Popup() {
               </FormHelperText>
             )}
           </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={
-              <Switch
-                onChange={(e) => setIsLowercase(e.target.checked)}
-                disabled={!isAuthenticated || usageCount >= maxUsage}
-              />
-            }
-            label={geti18nText('lowercaseSubjectLines')}
-          />
         </Grid>
         <Grid container item xs justifyContent="flex-start">
           <Button variant="text" color="inherit" onClick={openHelp}>
