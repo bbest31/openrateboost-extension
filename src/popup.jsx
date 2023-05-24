@@ -71,6 +71,14 @@ function Popup() {
   const [subjectLines, setSubjectLines] = useState([]);
   const [subjectLinesLoading, setSubjectLinesLoading] = useState(false);
 
+  // useEffect(() => {
+  //   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  //     if (request.type === 'setEmailBody') {
+  //       setEmailBody(request.payload.emailBody);
+  //     }
+  //   });
+  // }, []);
+
   /**
    * isAuthenticated - Checks if the user is authenticated by checking if the access_token, expires_in, and id_token are in session storage.
    */
