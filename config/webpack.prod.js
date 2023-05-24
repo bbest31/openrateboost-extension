@@ -28,6 +28,6 @@ module.exports = merge(config, {
       filename: '[name].css',
     }),
     // Load environment variables from .env file
-    new Dotenv(),
+    new Dotenv({ path: './.env' }),
   ],
 });
