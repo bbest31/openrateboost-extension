@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "OpenRateBoost",
   "short_name": "OpenRateBoost",
-  "version": "0.2.7",
-  "version_name": "0.2.7-alpha",
+  "version": "0.2.8",
+  "version_name": "0.2.8-beta",
   "homepage_url": "https://openrateboost.ai/",
   "author": {
     "email": "thebrandonmbest@gmail.com"
@@ -48,6 +48,6 @@
   ],
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgq2Gg/GXvYVc7m2Saw4NEIFZCU3MeUv60yoyC4r/qy+Je06jCIaR9MdeKItn4mb4eak7VGwKtxovNJYimAqhtEAvUrutqjOCLz3VvyFWO5PPiJjXyC3ZOXa+8H1mlxfwc4BoIYHgkcw+EQf+4xW6SEsmtNS6sVGAHFEukEr/eZ/Alz9xOkc1gbJkIpDu/iofwdlI8MioQdrmc+1itAU4CDMSqgVKcEWu4zPJyN6rsni8yQIoVdwUMjOg3fbJU3vT6S6GdDuuUup68+rIVz/9ZxuoWIGPGb2D6PSDW0ygy1NE3PcAlXah6kgySiFcPvxW123GUM3pQDXMyQpkcJelDwIDAQAB",
   "minimum_chrome_version": "107",
-  "permissions": ["identity", "storage", "scripting"],
+  "permissions": ["identity", "storage", "scripting", "tabs", "activeTab"],
   "host_permissions": ["https://mail.google.com/*"]
 }

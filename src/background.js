@@ -276,14 +276,24 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }
     })();
   } else if (request.type === 'openPopup') {
-    //open the popup.jsx window
-    chrome.windows.create({
-      url: chrome.runtime.getURL('popup.html'),
-      type: 'popup',
-      tabId: sender.tab.id,
-      width: 650,
-      height: 600,
+    // check all chrome windows to see if there is a tab with the popup.html url and if so, focus on it. Otherwise, open a new window.
+    chrome.tabs.query({url: chrome.runtime.getURL('popup.html')}, (tabs) => {
+      console.log('tabs', tabs);
+      if (tabs.length > 0) {
+        chrome.windows.update(tabs[0].windowId, { focused: true });
+        chrome.tabs.update(tabs[0].id, { active: true });
+      } else {
+        //open the popup.jsx window
+        chrome.windows.create({
+          url: chrome.runtime.getURL('popup.html'),
+          type: 'popup',
+          tabId: sender.tab.id,
+          width: 650,
+          height: 600,
+        });
+      }
     });
+    
     emailBody = request.payload.emailBody;
   } else if (request.type === 'getEmailBody') {
     //send the email body to the popup.jsx window that was retrieved from the content script.
