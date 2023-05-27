@@ -129,6 +129,9 @@ InboxSDK.load(2, process.env.INBOXSDK_APP_ID).then((sdk) => {
       composeNoticeView.el.style.margin = '0px';
       composeNoticeView.el.style.background = 'transparent';
       composeNoticeView.el.appendChild(parent);
+    })();
+
+    composeView.on('presending', () => {
       // attach tracking pixel
       let trackingPixel = document.createElement('img'); // Create a new image element
       trackingPixel.src = `${process.env.API_SERVER_URL}/tracking_pixel.png?uuid=${pixelId}`; // Set the source URL of the tracking pixel image
@@ -136,9 +139,6 @@ InboxSDK.load(2, process.env.INBOXSDK_APP_ID).then((sdk) => {
       trackingPixel.height = 1; // Set the height of the tracking pixel image to 1 pixel
       trackingPixel.style.opacity = 0; // Set the opacity of the tracking pixel image to 0 to make it invisible
       composeView.getBodyElement().appendChild(trackingPixel); // Append the tracking pixel image to the body of the email
-    })();
-
-    composeView.on('presending', () => {
       (async () => {
         const isAuth = await checkIsAuthenticated();
         if (isAuth === true) {
