@@ -14,6 +14,7 @@ The following have development examples
 API_SERVER_URL=http://localhost:8000/api/v1
 CLIENT_APP_URL=http://localhost:3000
 EXT_STORE_URL=https://chrome.google.com/webstore/category/extensions
+SURVEY_URL=http://localhost:3000/extension-uninstall
 
 AUTH0_CLIENT_ID=<client id of client app>
 AUTH0_DOMAIN=

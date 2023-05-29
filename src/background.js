@@ -6,6 +6,7 @@ const URLS = {
   api: process.env.API_SERVER_URL || '',
   app: process.env.CLIENT_APP_URL || '',
   webstore: process.env.EXT_STORE_URL || '',
+  survey: process.env.SURVEY_URL || '',
   mixpanel: 'https://api.mixpanel.com',
 };
 
@@ -97,6 +98,13 @@ async function getUserSub() {
   const { sub } = jwt_decode(id_token);
   return sub;
 }
+
+// Set the url to the survey when a user uninstalls the extension
+chrome.runtime.onInstalled.addListener((details) => {
+  if (details.reason === chrome.runtime.OnInstalledReason.INSTALL) {
+    chrome.runtime.setUninstallURL(URLS.survey);
+  }
+});
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === 'login') {
@@ -277,7 +285,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     })();
   } else if (request.type === 'openPopup') {
     // check all chrome windows to see if there is a tab with the popup.html url and if so, focus on it. Otherwise, open a new window.
-    chrome.tabs.query({url: chrome.runtime.getURL('popup.html')}, (tabs) => {
+    chrome.tabs.query({ url: chrome.runtime.getURL('popup.html') }, (tabs) => {
       console.log('tabs', tabs);
       if (tabs.length > 0) {
         chrome.windows.update(tabs[0].windowId, { focused: true });
@@ -293,7 +301,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
       }
     });
-    
+
     emailBody = request.payload.emailBody;
   } else if (request.type === 'getEmailBody') {
     //send the email body to the popup.jsx window that was retrieved from the content script.
