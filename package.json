@@ -1,6 +1,6 @@
 {
   "name": "openrateboost-extension",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "OpenRateBoost is an AI-powered app designed to boost email open rates by generating optimized subject lines for your emails.",
   "private": true,
   "scripts": {
